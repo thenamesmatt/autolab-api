@@ -1,11 +1,11 @@
-package amg.app.autolabapi.model
+package amg.app.autolabapi.entities
 
 import jakarta.persistence.*
 
 
 @Entity
 @Table(name = "audit_type")
-class AuditType(
+class AuditTypeEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var auditTypeId: Int? = null,

@@ -1,7 +1,7 @@
 package amg.app.autolabapi.service
 
-import amg.app.autolabapi.model.Audit
-import amg.app.autolabapi.model.AuditType
+import amg.app.autolabapi.entities.AuditEntity
+import amg.app.autolabapi.entities.AuditTypeEntity
 import amg.app.autolabapi.repository.AuditRepository
 import amg.app.autolabapi.repository.AuditTypeRepository
 import org.springframework.stereotype.Service
@@ -12,13 +12,13 @@ class AuditService(
     private val auditRepository: AuditRepository,
     private val auditTypeRepository: AuditTypeRepository
 ) {
-    fun findAllAudits(): List<Audit> = auditRepository.findAll()
+    fun findAllAudits(): List<AuditEntity> = auditRepository.findAll()
 
     @Transactional
-    fun createAudit(audit: Audit): Audit = auditRepository.save(audit)
+    fun createAudit(auditEntity: AuditEntity): AuditEntity = auditRepository.save(auditEntity)
 
-    fun findAllAuditTypes(): List<AuditType> = auditTypeRepository.findAll()
+    fun findAllAuditTypes(): List<AuditTypeEntity> = auditTypeRepository.findAll()
 
     @Transactional
-    fun createAuditType(auditType: AuditType): AuditType = auditTypeRepository.save(auditType)
+    fun createAuditType(auditTypeEntity: AuditTypeEntity): AuditTypeEntity = auditTypeRepository.save(auditTypeEntity)
 }
