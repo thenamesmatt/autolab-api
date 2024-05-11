@@ -19,7 +19,18 @@ class UserEntity(
     @Column(nullable = false, unique = true)
     val email: String = "",
 
+    @Column(nullable = false)
+    val first_name: String = "",
+
+    @Column(nullable = false)
+    val last_name: String = "",
+
+    @Column(nullable = false)
+    val permission: Int = 0,
+
     val avatar: String? = null,
 
-    val bio: String? = null
+    val bio: String? = null,
+
+
 )

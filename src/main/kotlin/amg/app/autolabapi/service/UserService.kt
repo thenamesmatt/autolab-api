@@ -13,7 +13,7 @@ class UserService(
 ) {
     private val passwordEncoder = BCryptPasswordEncoder()
 
-    fun addUser(username: String, password: String, email: String, avatar: String?, bio: String?): Pair<UserEntity?, String> {
+    fun addUser(username: String, password: String, email: String, avatar: String?, firstName: String, lastName: String, bio: String?): Pair<UserEntity?, String> {
 
         // check to see if the user already exists
         if (userRepository.findByUsername(username) != null || userRepository.findByEmail(email) != null) {
@@ -41,6 +41,8 @@ class UserService(
             password = encryptedPassword,
             email = email,
             avatar = avatar,
+            first_name = firstName,
+            last_name = lastName,
             bio = bio,
         )
 

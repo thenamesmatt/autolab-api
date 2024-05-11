@@ -13,9 +13,16 @@ import org.springframework.web.bind.annotation.*
 class UserController(private val userService: UserService) {
 
     @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
     fun addUser(@RequestBody user: UserEntity): Triple<UserDto?, HttpStatus, String?> {
-        val newUser = userService.addUser(user.username, user.password, user.email, user.avatar, user.bio)
+        val newUser = userService.addUser(
+            username = user.username,
+            password = user.password,
+            email = user.email,
+            avatar = user.avatar,
+            firstName = user.first_name,
+            lastName = user.last_name,
+            bio = user.bio
+        )
         return newUser.first?.let { user ->
             val token = JwtUtil.generateToken(user.username)
             val userDto = UserDto(
@@ -23,6 +30,8 @@ class UserController(private val userService: UserService) {
                 email = user.email,
                 avatar = user.avatar ?: "",
                 bio = user.bio ?: "",
+                firstName = user.first_name,
+                lastName = user.last_name,
                 token = token
             )
             Triple(userDto, HttpStatus.OK, newUser.second)
@@ -40,6 +49,8 @@ class UserController(private val userService: UserService) {
                 email = user.email,
                 avatar = user.avatar ?: "",
                 bio = user.bio ?: "",
+                firstName = user.first_name,
+                lastName = user.last_name,
                 token = token
             )
             Triple(userDto, HttpStatus.OK, verifiedUser.second)
@@ -57,6 +68,8 @@ class UserController(private val userService: UserService) {
                 email = user.email,
                 avatar = user.avatar ?: "",
                 bio = user.bio ?: "",
+                firstName = user.first_name,
+                lastName = user.last_name,
                 token = tokenModel.token
             )
             Triple(userDto, HttpStatus.OK, verifiedUser.second)
